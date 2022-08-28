@@ -7,8 +7,6 @@ import cv2
 model_name = 'hand_model.sav'
 
 # custom function
-
-
 def rps(num):
     if num == 0:
         return 'PAPER'
@@ -23,7 +21,7 @@ def rps(num):
 font = cv2.FONT_HERSHEY_PLAIN
 hands = hand_detection_module.HandDetector(max_hands=num_hand)
 model = pickle.load(open(model_name, 'rb'))
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(cv2.CAP_DSHOW+1)
 while cap.isOpened():
     success, frame = cap.read()
     if not success:
