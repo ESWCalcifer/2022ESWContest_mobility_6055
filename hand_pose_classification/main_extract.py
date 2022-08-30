@@ -50,15 +50,15 @@ while cap_laptop.isOpened():
             # image = cv2.putText(image, fps, (70, 70), font, 3, (0, 0, 0), 3)
             success_usb, frame_usb = cap_usb.read()
             if cap_usb.isOpened():
-                if (sci % 15000): # 15000~30000이면 1초에 약 1~2장 찍힘
+                if (sci % 12000): # 15000~30000이면 1초에 약 1~2장 찍힘
                     if pred == "SCISSOR":
                     # if (index % 1000 == 0):
                         # cap_usb.set(cv2.CAP_PdROP_POS_MSEC,(index*1000))
                         curr_time = datetime.now().strftime("%H%M%S") 
                         cv2.imwrite("frame_%s.png" % (curr_time), frame_usb)
-                    if pred == "GOOD":
-                        cap_laptop.release()
-                        cap_usb.release()
+                    # if pred == "GOOD":
+                    #     cap_laptop.release()
+                    #     cap_usb.release()
             sci += 1
                     # cap_usb.release()
                     # else:
