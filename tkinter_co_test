@@ -1,0 +1,54 @@
+import tkinter as tk
+root=tk.Tk()
+root.title('트렁크 디스플레이')
+root.geometry("600x500+100+100")
+lab11=tk.Label(root, text="CO농도:",width=8,height=1,font=('맑은 고딕',15,'bold'))
+lab11.grid(row=0, column=0,padx=5, pady=10)
+#ent12=tk.Entry(font=('맑은 고딕',16,'bold'),bg='white',width=8)
+#ent12.grid(row=0,column=1,padx=5,pady=10)
+
+#co농도 받아온 변수 entco로 가정
+#entco=80.
+
+entco=80
+
+
+
+entco=tk.DoubleVar(root,entco)
+#entco.set(80)
+lab12=tk.Label(root, textvariable=entco, width=8,height=1,font=('맑은 고딕',15,'bold'),bg='#2F5597',fg='white')
+lab12.grid(row=0, column=1,padx=5, pady=10)
+
+
+#double_variable = tk.DoubleVar(root,55.2)
+ 
+#lab12 = tk.Label(root, textvariable=double_variable, width=8,height=1)
+#lab12.grid(row=0, column=1,padx=5, pady=10)
+
+lab13=tk.Label(root, text="ppm",width=8,height=1,font=('맑은 고딕',15,'bold'))
+lab13.grid(row=0, column=3,padx=5, pady=10)
+
+a=tk.DoubleVar(root,80)
+b=tk.DoubleVar(root,150)
+c=tk.DoubleVar(root,200)
+
+if entco.get()<a.get():
+    lab14=tk.Label(root, text=" ", width=2,height=1,font=('맑은 고딕',15,'bold'),bg='#228B22',fg='white')
+    lab14.grid(row=0, column=4,padx=5, pady=10)
+    
+elif entco.get()<b.get() and entco.get()>=a.get():
+    lab14=tk.Label(root, text=" ", width=2,height=1,font=('맑은 고딕',15,'bold'),bg='#FFFF00',fg='white')
+    lab14.grid(row=0, column=4,padx=5, pady=10)
+    
+
+elif entco.get()<c.get() and entco.get()>=b.get():
+    lab14=tk.Label(root, text=" ", width=2,height=1,font=('맑은 고딕',15,'bold'),bg='#FF8C00',fg='white')
+    lab14.grid(row=0, column=4,padx=5, pady=10)
+
+else:
+    lab14=tk.Label(root, text=" ", width=2,height=1,font=('맑은 고딕',15,'bold'),bg='#FF0000',fg='white')
+    lab14.grid(row=0, column=4,padx=5, pady=10)
+    
+    
+    
+root.mainloop()
