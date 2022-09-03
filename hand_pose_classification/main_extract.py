@@ -18,11 +18,11 @@ model_name = 'hand_model.sav'
 # custom function
 def rps(num):
     if num == 0:
-        return 'PAPER'
-    elif num == 1:
-        return 'GOOD'
+        return 'Start'
+    # elif num == 1:
+    #     return 'GOOD'
     else:
-        return 'SCISSOR'
+        return 'End'
 
 font = cv2.FONT_HERSHEY_PLAIN
 hands = hand_detection_module.HandDetector(max_hands=num_hand)
@@ -50,8 +50,8 @@ while cap_laptop.isOpened():
             # image = cv2.putText(image, fps, (70, 70), font, 3, (0, 0, 0), 3)
             success_usb, frame_usb = cap_usb.read()
             if cap_usb.isOpened():
-                if (sci % 12000): # 15000~30000이면 1초에 약 1~2장 찍힘
-                    if pred == "SCISSOR":
+                if (sci % 6000): # 15000~30000이면 1초에 약 1~2장 찍힘
+                    if pred == "Start":
                     # if (index % 1000 == 0):
                         # cap_usb.set(cv2.CAP_PdROP_POS_MSEC,(index*1000))
                         curr_time = datetime.now().strftime("%H%M%S") 
