@@ -1,7 +1,7 @@
 # Programme core
 num_hand = 1
-num_class = 3
-num_instance = 500 #per_class
+num_class = 2
+num_instance = 1000 #per_class
 break_time = 1 #min 2 seconds
 
 # uga buga functions
@@ -12,7 +12,6 @@ if __name__ == '__main__':
     import time
     import hand_detection_module
     from id_distance import calc_all_distance
-
 
     full_data = []
     data_target = 0
