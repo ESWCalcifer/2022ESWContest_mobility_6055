@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "117390220505",
+    "project_id": "calcifer-react",
+    "storage_bucket": "calcifer-react.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117390220505:android:0d3f5a9dba4ed4560172c8",
+        "android_client_info": {
+          "package_name": "com.example.calciferapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117390220505-t3h07ng9hu3lihapctlo508s0r3s299k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQoppNITyFv7fof9qvxXMnOua82adzv4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117390220505-t3h07ng9hu3lihapctlo508s0r3s299k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "117390220505-o30ubjajj44mkkdkji4f5ac2jkuni6ka.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.calciferapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
