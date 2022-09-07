@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '117390220505',
     projectId: 'calcifer-react',
     authDomain: 'calcifer-react.firebaseapp.com',
+    databaseURL: 'https://calcifer-react-default-rtdb.firebaseio.com',
     storageBucket: 'calcifer-react.appspot.com',
     measurementId: 'G-VKYZWYCKE2',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:117390220505:android:0d3f5a9dba4ed4560172c8',
     messagingSenderId: '117390220505',
     projectId: 'calcifer-react',
+    databaseURL: 'https://calcifer-react-default-rtdb.firebaseio.com',
     storageBucket: 'calcifer-react.appspot.com',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:117390220505:ios:5cd859be03ca7ec60172c8',
     messagingSenderId: '117390220505',
     projectId: 'calcifer-react',
+    databaseURL: 'https://calcifer-react-default-rtdb.firebaseio.com',
     storageBucket: 'calcifer-react.appspot.com',
     iosClientId: '117390220505-o30ubjajj44mkkdkji4f5ac2jkuni6ka.apps.googleusercontent.com',
     iosBundleId: 'com.example.calciferapp',
@@ -76,6 +79,7 @@ class DefaultFirebaseOptions {
     appId: '1:117390220505:ios:5cd859be03ca7ec60172c8',
     messagingSenderId: '117390220505',
     projectId: 'calcifer-react',
+    databaseURL: 'https://calcifer-react-default-rtdb.firebaseio.com',
     storageBucket: 'calcifer-react.appspot.com',
     iosClientId: '117390220505-o30ubjajj44mkkdkji4f5ac2jkuni6ka.apps.googleusercontent.com',
     iosBundleId: 'com.example.calciferapp',
