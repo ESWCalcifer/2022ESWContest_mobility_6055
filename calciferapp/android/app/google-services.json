@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "117390220505",
+    "firebase_url": "https://calcifer-react-default-rtdb.firebaseio.com",
     "project_id": "calcifer-react",
     "storage_bucket": "calcifer-react.appspot.com"
   },
