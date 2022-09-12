@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: const MyHomePage(title: 'Calcifer App'),
+      home: const MyHomePage(title: '쓰담'),
     );
   }
 }
