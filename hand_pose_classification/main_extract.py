@@ -30,6 +30,8 @@ model = pickle.load(open(model_name, 'rb'))
 
 cap_laptop = cv2.VideoCapture(cv2.CAP_DSHOW)
 cap_usb= cv2.VideoCapture(cv2.CAP_DSHOW+1)
+# datatype of output frame is np ndarray
+# use print(type(cap_laptop))
 
 sci = 0
 while cap_laptop.isOpened():
