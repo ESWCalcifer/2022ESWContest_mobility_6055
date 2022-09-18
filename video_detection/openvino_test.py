@@ -2,21 +2,20 @@ import cv2
 import time
 import sys
 import numpy as np
-from openvino.runtime import Core
+from openvino.inference_engine import IECore
 
-ie_core = Core()
+ie_core = IECore()
 converted_model_path = "./md_v5a.0.0.xml" #구글 드라이브에서 뒤에 openvino 있는 7z 파일 받아서 쓰세요
-model = ie_core.read_model(model=converted_model_path)
-compiled_model = ie_core.compile_model(model=model, device_name="CPU")
+network = ie_core.read_network(model=converted_model_path)
+exec_net_ir = ie_core.load_network(network=network, device_name="MYRIAD")
 
-input_layer = compiled_model.input(0)
-output_layer = compiled_model.output(0)
-
-height, width = list(input_layer.shape)[1:3]
+input_layer_ir = next(iter(exec_net_ir.input_info))
+output_layer_ir = next(iter(exec_net_ir.outputs))
 
 
-INPUT_WIDTH = 640
-INPUT_HEIGHT = 640
+
+INPUT_WIDTH = 256
+INPUT_HEIGHT = 256
 SCORE_THRESHOLD = 0.2
 NMS_THRESHOLD = 0.4
 CONFIDENCE_THRESHOLD = 0.4
@@ -25,13 +24,16 @@ CONFIDENCE_THRESHOLD = 0.4
 def detect(image):
     blob = cv2.dnn.blobFromImage(
         image, 1/255.0, (INPUT_WIDTH, INPUT_HEIGHT), swapRB=True, crop=False)
-    preds = compiled_model([blob])[output_layer]
+    preds = exec_net_ir.infer(inputs={input_layer_ir: blob})
+    preds = preds[output_layer_ir]
+    
     return preds
 
 
 def load_capture():
     capture = cv2.VideoCapture(0)
     return capture
+
 
 
 def wrap_detection(input_image, output_data):
@@ -56,7 +58,7 @@ def wrap_detection(input_image, output_data):
             class_id = max_indx[1]
             if (classes_scores[class_id] > .25):
 
-                confidences.append(confidence)
+                confidences.append(float(confidence))
 
                 class_ids.append(class_id)
 
@@ -68,17 +70,16 @@ def wrap_detection(input_image, output_data):
                 height = int(h * y_factor)
                 box = np.array([left, top, width, height])
                 boxes.append(box)
-
     indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.25, 0.45)
-
+    indexes = np.array(indexes)
     result_class_ids = []
     result_confidences = []
     result_boxes = []
-
-    for i in indexes:
-        result_confidences.append(confidences[i])
-        result_class_ids.append(class_ids[i])
-        result_boxes.append(boxes[i])
+    for index in indexes:
+        for i in index:
+            result_confidences.append(confidences[i])
+            result_class_ids.append(class_ids[i])
+            result_boxes.append(boxes[i])
 
     return result_class_ids, result_confidences, result_boxes
 
