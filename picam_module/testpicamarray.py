@@ -10,7 +10,7 @@ rawCapture = PiRGBArray(camera)
 time.sleep(0.1)
 # grab an image from the camera
 camera.capture(rawCapture, format="bgr")
-image = rawCapture.array
+image = rawCapture.array # this is np.ndarray
 # display the image on screen and wait for a keypress
 cv2.imshow("Image", image)
 cv2.waitKey(0)
