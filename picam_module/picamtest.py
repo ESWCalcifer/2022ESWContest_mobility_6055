@@ -14,7 +14,10 @@ time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	# grab the raw NumPy array representing the image, then initialize the timestamp
 	# and occupied/unoccupied text
+	# print(type(frame))
 	image = frame.array
+	print(type(image))
+
 	# show the frame
 	cv2.imshow("Frame", image)
 	key = cv2.waitKey(1) & 0xFF
