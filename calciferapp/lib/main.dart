@@ -1,12 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_options.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_web/webview_flutter_web.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
-  WebView.platform = WebWebViewPlatform();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -31,25 +30,74 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Image1 extends StatelessWidget {
+class Image1 extends StatefulWidget {
+  @override
+  State<Image1> createState() => _Image1State();
+}
+
+class _Image1State extends State<Image1> {
+  bool detected = false;
+  Stream<String> fetchFirstCam() async* {
+    while (true) {
+      var result =
+          await http.get(Uri.parse("http://192.168.0.6:5000/get_first_camera"));
+      await Future.delayed(const Duration(milliseconds: 500));
+      yield jsonDecode(result.body)['detected'].toString();
+      setState(() {
+        detected = jsonDecode(result.body)['detected'].toString() == 'True'
+            ? true
+            : false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Card(
-        child: ListTile(
-          title: const Text(
-            "주변의 위험을 확인해보세요",
-            textScaleFactor: 1.5,
-          ),
-          subtitle: Card(
-            child: Image.network(
-              'http://192.168.0.6:5000',
-              width: 640,
-            ),
-          ),
-        ),
-      ),
-    );
+    return StreamBuilder<String>(
+        stream: fetchFirstCam(),
+        builder: (context, snapshot) {
+          return SizedBox(
+            child: detected
+                ? Card(
+                    color: Colors.yellow[700],
+                    child: ListTile(
+                      title: const Text(
+                        "주변에서 위험이 감지되었습니다.",
+                        textScaleFactor: 1.5,
+                      ),
+                      subtitle: Column(
+                        children: [
+                          Card(
+                            child: Image.network(
+                              'http://192.168.0.6:5000',
+                              width: 640,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : Card(
+                    color: Colors.white,
+                    child: ListTile(
+                      title: const Text(
+                        "주변에 감지된 위험이 없습니다.",
+                        textScaleFactor: 1.5,
+                      ),
+                      subtitle: Column(
+                        children: [
+                          Card(
+                            child: Image.network(
+                              'http://192.168.0.6:5000',
+                              width: 640,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+          );
+        });
   }
 }
 

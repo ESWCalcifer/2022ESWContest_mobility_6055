@@ -3,6 +3,7 @@ import time
 import sys
 import numpy as np
 from openvino.inference_engine import IECore
+from pymongo import MongoClient
 
 INPUT_WIDTH = 256
 INPUT_HEIGHT = 256
@@ -29,6 +30,8 @@ class video_detection():
         self.input_layer_ir = next(iter(self.exec_net_ir.input_info))
         self.output_layer_ir = next(iter(self.exec_net_ir.outputs))
         self.capture = cv2.VideoCapture(0)
+        self.detected = False
+        self.client = MongoClient("mongodb://127.0.0.1:27017")
 
     def detect(self, image):
         blob = cv2.dnn.blobFromImage(
@@ -80,7 +83,6 @@ class video_detection():
         result = np.zeros((_max, _max, 3), np.uint8)
         result[0:row, 0:col] = frame
         return result
-
     def get_frame(self):
         _, frame = self.capture.read()
         inputImage = self.format_yolov5(frame)
@@ -93,5 +95,9 @@ class video_detection():
                         (box[0] + box[2], box[1]), color, -1)
             cv2.putText(frame, class_name[classid], (box[0],
                                                 box[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 0))
+        if len(boxes) > 0:
+            self.client["video"]["detection"].update_one({"_id":"1"}, {"$set":{"detected":"True"}})
+        else:
+            self.client["video"]["detection"].update_one({"_id":"1"}, {"$set":{"detected":"False"}})
         return frame
 
