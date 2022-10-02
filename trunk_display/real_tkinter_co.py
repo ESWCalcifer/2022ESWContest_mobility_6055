@@ -19,9 +19,9 @@ lab11.grid(row=0, column=0,padx=5, pady=10)
 #entco.set(80.0)
 
 coppm = 0.
-a=tk.DoubleVar(root,10.0)
-b=tk.DoubleVar(root,20.0)
-c=tk.DoubleVar(root,30.0)
+a=tk.DoubleVar(root,8.0)
+b=tk.DoubleVar(root,9.0)
+c=tk.DoubleVar(root,10.0)
 entco=tk.DoubleVar(root,coppm)
 #entco=tk.DoubleVar(root,coppm)
 def read_serial():
