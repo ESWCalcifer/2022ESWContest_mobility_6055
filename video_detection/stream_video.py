@@ -1,7 +1,6 @@
 from openvino_detection import video_detection
-from flask import Flask, render_template, Response, stream_with_context, request
+from flask import Flask, render_template, Response
 import cv2
-
 
 app = Flask(__name__)
 detection = video_detection()

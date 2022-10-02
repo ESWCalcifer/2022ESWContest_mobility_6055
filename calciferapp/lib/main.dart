@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_options.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_web/webview_flutter_web.dart';
 
 void main() async {
+  WebView.platform = WebWebViewPlatform();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -24,6 +27,28 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
       ),
       home: const MyHomePage(title: '쓰담'),
+    );
+  }
+}
+
+class Image1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Card(
+        child: ListTile(
+          title: const Text(
+            "주변의 위험을 확인해보세요",
+            textScaleFactor: 1.5,
+          ),
+          subtitle: Card(
+            child: Image.network(
+              'http://192.168.0.6:5000',
+              width: 640,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -150,12 +175,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             VideosInformation(),
             COInformation(),
+            Image1(),
           ],
         ),
       ),
