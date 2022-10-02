@@ -30,8 +30,8 @@ const int gasPin = A2;
 
 int INA = 5;  
 int INB = 6;
-int gas1=30;   //이거 ppm아니라 ppm200의 역변환계산필요함.
-int gas2=20;
+int gas1=9;   //이거 ppm아니라 ppm200의 역변환계산필요함.
+int gas2=8;
 boolean window = false;   //false -> 닫혀있는상태
                           //true -> 열려있는상태
 
