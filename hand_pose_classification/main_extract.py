@@ -21,11 +21,11 @@ model_name = 'hand_model.sav'
 # custom function
 def rps(num):
     if num == 0:
-        return 'Start'
+        return 'Start' #paper
     # elif num == 1:
     #     return 'GOOD'
     else:
-        return 'End'
+        return 'End' #rock
 
 font = cv2.FONT_HERSHEY_PLAIN
 hands = hand_detection_module.HandDetector(max_hands=num_hand)
