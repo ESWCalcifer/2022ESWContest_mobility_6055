@@ -1,6 +1,6 @@
 import socket
 
-HOST = '192.168.0.210'
+HOST = '192.168.0.200'
 # Server IP or Hostname
 PORT = 12345 
 # Pick an open Port (1000+ recommended), must match the client sport
