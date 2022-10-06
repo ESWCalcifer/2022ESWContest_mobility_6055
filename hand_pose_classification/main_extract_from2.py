@@ -15,6 +15,7 @@ from datetime import datetime
 import time
 from picamera.array import PiRGBArray
 from picamera import PiCamera
+import paho.mqtt.client as mqtt
 
 model_name = 'hand_model.sav'
 
@@ -41,6 +42,29 @@ cap_usb= cv2.VideoCapture(-1)
 # datatype of output frame is np ndarray
 # use print(type(cap_laptop))
 
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("connected OK")
+    else:
+        print("Bad connection Returned code=", rc)
+
+
+def on_disconnect(client, userdata, flags, rc=0):
+    print(str(rc))
+
+
+def on_publish(client, userdata, mid):
+    print("In on_pub callback mid= ", mid)
+
+client = mqtt.Client()
+# set callback function on_connect(connect to broker), on_disconnect(브로커에 접속중료), on_publish(메세지 발행)
+client.on_connect = on_connect
+client.on_disconnect = on_disconnect
+client.on_publish = on_publish
+# address : localhost, port: 1883 에 연결
+client.connect('192.168.0.200', 1883)
+client.loop_start()
+
 sci = 0
 # while cap_laptop.isOpened():
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -66,8 +90,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 if pred == "Start":
                 # if (index % 1000 == 0):
                     # cap_usb.set(cv2.CAP_PdROP_POS_MSEC,(index*1000))
+                    client.publish("/home/pim/esw/test_mqtt/gesture","startsig", 1)
                     curr_time = datetime.now().strftime("%H%M%S") 
-                    cv2.imwrite("frame_%s.png" % (curr_time), frame_usb)
+                    # cv2.imwrite("frame_%s.png" % (curr_time), frame_usb)
                 # if pred == "GOOD":
                 #     cap_laptop.release()
                 #     cap_usb.release()
@@ -82,3 +107,4 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # cv2.imshow("Color", frame_laptop)
 
     cv2.waitKey(1)
+    client.loop_stop()
