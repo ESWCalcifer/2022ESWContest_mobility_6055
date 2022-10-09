@@ -91,7 +91,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 # if (index % 1000 == 0):
                     # cap_usb.set(cv2.CAP_PdROP_POS_MSEC,(index*1000))
                     client.publish("/home/pim/esw/test_mqtt/gesture","startsig", 1)
+                    print("startsig given")
                     curr_time = datetime.now().strftime("%H%M%S") 
+                elif pred == "End":
+                    client.publish("/home/pim/esw/test_mqtt/gesture","stopsig", 1)
+                    print("stopsig given")
                     # cv2.imwrite("frame_%s.png" % (curr_time), frame_usb)
                 # if pred == "GOOD":
                 #     cap_laptop.release()
