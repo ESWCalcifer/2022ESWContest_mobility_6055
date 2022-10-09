@@ -43,6 +43,7 @@ dependencies:
   webview_flutter_web: ^0.1.0+4
   mongo_dart: ^0.7.4+1
   realm_dart: ^0.4.0+beta
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:

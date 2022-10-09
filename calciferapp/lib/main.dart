@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_options.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_switch/flutter_switch.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,8 +55,9 @@ class _Image1State extends State<Image1> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<String>(
-        stream: fetchFirstCam(),
-        builder: (context, snapshot) {
+      stream: fetchFirstCam(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
           return SizedBox(
             child: detected
                 ? Card(
@@ -97,7 +99,105 @@ class _Image1State extends State<Image1> {
                     ),
                   ),
           );
-        });
+        }
+        return SizedBox(
+          child: Card(
+            color: Colors.grey[400],
+            child: const ListTile(
+              title: Text(
+                "아직 카메라 1가 켜지지 않은 것 같습니다.",
+                textScaleFactor: 1.5,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class Image2 extends StatefulWidget {
+  @override
+  State<Image2> createState() => _Image2State();
+}
+
+class _Image2State extends State<Image2> {
+  bool detected = false;
+  Stream<String> fetchFirstCam() async* {
+    while (true) {
+      var result =
+          await http.get(Uri.parse("http://192.168.0.6:5000/get_first_camera"));
+      await Future.delayed(const Duration(milliseconds: 500));
+      yield jsonDecode(result.body)['detected'].toString();
+      setState(() {
+        detected = jsonDecode(result.body)['detected'].toString() == 'True'
+            ? true
+            : false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<String>(
+      stream: fetchFirstCam(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return SizedBox(
+            child: detected
+                ? Card(
+                    color: Colors.yellow[700],
+                    child: ListTile(
+                      title: const Text(
+                        "주변에서 위험이 감지되었습니다.",
+                        textScaleFactor: 1.5,
+                      ),
+                      subtitle: Column(
+                        children: [
+                          Card(
+                            child: Image.network(
+                              'http://192.168.0.6:5000',
+                              width: 640,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : Card(
+                    color: Colors.white,
+                    child: ListTile(
+                      title: const Text(
+                        "주변에 감지된 위험이 없습니다.",
+                        textScaleFactor: 1.5,
+                      ),
+                      subtitle: Column(
+                        children: [
+                          Card(
+                            child: Image.network(
+                              'http://192.168.0.6:5000',
+                              width: 640,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+          );
+        }
+        return SizedBox(
+          child: Card(
+            color: Colors.grey[400],
+            child: const ListTile(
+              title: Text(
+                "아직 카메라 2가 켜지지 않은 것 같습니다.",
+                textScaleFactor: 1.5,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -230,6 +330,7 @@ class _MyHomePageState extends State<MyHomePage> {
             VideosInformation(),
             COInformation(),
             Image1(),
+            Image2(),
           ],
         ),
       ),
