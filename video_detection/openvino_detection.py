@@ -30,8 +30,7 @@ class video_detection():
         self.input_layer_ir = next(iter(self.exec_net_ir.input_info))
         self.output_layer_ir = next(iter(self.exec_net_ir.outputs))
         self.capture = cv2.VideoCapture(0)
-        self.detected = False
-        self.client = MongoClient("mongodb://127.0.0.1:27017")
+
 
     def detect(self, image):
         blob = cv2.dnn.blobFromImage(
@@ -95,9 +94,5 @@ class video_detection():
                         (box[0] + box[2], box[1]), color, -1)
             cv2.putText(frame, class_name[classid], (box[0],
                                                 box[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 0, 0))
-        if len(boxes) > 0:
-            self.client["video"]["detection"].update_one({"_id":"1"}, {"$set":{"detected":"True"}})
-        else:
-            self.client["video"]["detection"].update_one({"_id":"1"}, {"$set":{"detected":"False"}})
         return frame
 
