@@ -13,9 +13,12 @@ from datetime import datetime
 import time
 
 import paho.mqtt.client as mqtt
+import imageio
 
-
-# cap_usb= cv2.VideoCapture(-1)
+image_lst = []
+cap_usb= cv2.VideoCapture(-1)
+global message
+message = str
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -24,54 +27,30 @@ def on_connect(client, userdata, flags, rc):
     # reconnect then subscriptions will be renewed.
     client.subscribe("/home/pim/esw/test_mqtt/gesture")
 sci = 0
+
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    cap_usb= cv2.VideoCapture(-1)
-    success_usb, frame_usb = cap_usb.read()
-    if cap_usb.isOpened():
-        # print(sci)
-        if (sci % 6000): # 15000~30000이면 1초에 약 1~2장 찍힘
-            if str(client.on_
-            message) == "startsig":
-                print('AY')
-                # if (index % 1000 == 0):
-                    # cap_usb.set(cv2.CAP_PdROP_POS_MSEC,(index*1000))
-                curr_time = datetime.now().strftime("%H%M%S") 
-                cv2.imwrite("./frame_%s.bmp" % (curr_time), frame_usb)
-                if not cv2.imwrite("./frame_%s.bmp" % (curr_time), frame_usb):
-                    raise Exception("can't write image")
-    sci += 1
-    print("no") #msg.topic+" "+str(msg.payload))
-    # return str(msg.payload)
+    global message
+    message = str(msg.payload.decode("utf-8"))
 
 client = mqtt.Client()
-# Client(client_id="pi2", clean_session=True, userdata=None, protocol=MQTTv311, transport="tcp")
 client.on_connect = on_connect
 client.on_message = on_message
-client.connect("192.168.0.200", 1883, 60)
-# client.loop_start()
-# print(success_usb)
-# print(cap_usb.isOpened())
-sci += 1
-if cap_usb.isOpened():
-    print(sci)
-    if (sci % 6000): # 15000~30000이면 1초에 약 1~2장 찍힘
-        
-        if str(client.on_message) == "startsig":
-            print('AY')
-                # if (index % 1000 == 0):
-                    # cap_usb.set(cv2.CAP_PdROP_POS_MSEC,(index*1000))
-            curr_time = datetime.now().strftime("%H%M%S") 
-            cv2.imwrite("./frame_%s.bmp" % (curr_time), frame_usb)
-            if not cv2.imwrite("./frame_%s.bmp" % (curr_time), frame_usb):
-                raise Exception("can't write image")
-                # if pred == "GOOD":
-                #     cap_laptop.release()
-                #     cap_usb.release()
-    
-                # cap_usb.release()
-                # else:
-                #     break
+client.connect_async("192.168.0.200",1883, 60)
+while True:
+    client.loop_start()
+    if cap_usb.isOpened():
+        success_usb, frame_usb = cap_usb.read()
+        if message == "startsig":
+            image_lst.append(frame_usb)
+            # curr_time = datetime.now().strftime("%H%M%S%f")[:-1] 
+            # cv2.imwrite("./frame_%s.png" % (curr_time), frame_usb)
+            # if not cv2.imwrite("./frame_%s.png" % (curr_time), frame_usb):
+            #     raise Exception("can't write image")
+            image = frame_usb
+    if message == "stopsig" and len(image_lst) is not 0:
+        curr_time = datetime.now().strftime("%H%M%S")
+        imageio.mimsave(f'./video_{curr_time}.gif', image_lst, fps = 10)
+        cv2.imwrite(f"./frame_{curr_time}.jpg", frame_usb)
+        image_lst = []
 
-# client.loop_stop()
-client.loop_forever()
