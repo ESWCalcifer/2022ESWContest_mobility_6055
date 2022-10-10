@@ -96,7 +96,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 elif pred == "End":
                     client.publish("/home/pim/esw/test_mqtt/gesture","stopsig", 1)
                     print("stopsig given")
-                    # cv2.imwrite("frame_%s.png" % (curr_time), frame_usb)
+                    cv2.imwrite("frame_%s.png" % (curr_time), frame_usb)
                 # if pred == "GOOD":
                 #     cap_laptop.release()
                 #     cap_usb.release()
