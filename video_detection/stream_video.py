@@ -1,19 +1,16 @@
 from openvino_detection import video_detection
-from flask import Flask, render_template, Response
+from flask import Flask, Response
 from flask_cors import CORS
-from pymongo import MongoClient
+import sqlite3
 from bson.json_util import dumps
-import json
 import cv2
 
 app = Flask(__name__)
 CORS(app)
 detection = video_detection()
 detection.get_frame()
-
-client = MongoClient('localhost:27017')
-db = client.video
-collection = db.detection
+con = sqlite3.connect("video_db", check_same_thread=False)
+cur = con.cursor()
 
 def video_stream():
     while True:
@@ -29,17 +26,17 @@ def video_feed():
 @app.route("/get_first_camera", methods = ['GET'])
 def get_first_camera():
     try:
-        first_detection = collection.find_one({"_id":"1"})
-        return dumps(first_detection)
+        res = cur.execute("select detected from video where camera_id=0")
+        return dumps(res)
     except Exception as e:
         return dumps({'error' : str(e)})
 
-# @app.route("/get_second_camera", methods = ['GET'])
-# def get_second_camera():
-#     try:
-#         second_detection = collection.find_one({"_id":"2"})
-#         return dumps(second_detection)
-#     except Exception as e:
-#         return dumps({'error' : str(e)})
+@app.route("/get_second_camera", methods = ['GET'])
+def get_second_camera():
+    try:
+        res = cur.execute("select detected from video where camera_id=1")
+        return dumps(res)
+    except Exception as e:
+        return dumps({'error' : str(e)})
 
 app.run(host='0.0.0.0', port='5000', debug=False)

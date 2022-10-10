@@ -3,7 +3,7 @@ import time
 import sys
 import numpy as np
 from openvino.inference_engine import IECore
-from pymongo import MongoClient
+import sqlite3
 
 INPUT_WIDTH = 256
 INPUT_HEIGHT = 256
@@ -20,7 +20,8 @@ total_frames = 0
 fps = -1
 
 class_name = ["ANIMAL", "PERSON", "VEHICLE"]
-
+con = sqlite3.connect("video_db", check_same_thread=False)
+cur = con.cursor()
 class video_detection():
     def __init__(self):
         ie_core = IECore()
@@ -74,6 +75,12 @@ class video_detection():
             result_confidences.append(confidences[i])
             result_class_ids.append(class_ids[i])
             result_boxes.append(boxes[i])
+        if len(result_boxes) > 0:
+            cur.execute("update video set detected='True' where camera_id=0")
+            con.commit()
+        else:
+            cur.execute("update video set detected='False' where camera_id=0")
+            con.commit()
         return result_class_ids, result_confidences, result_boxes
 
     def format_yolov5(self, frame):
