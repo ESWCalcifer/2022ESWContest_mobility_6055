@@ -16,6 +16,7 @@ class Scene():
         self.client.connect_async("192.168.0.200",1883, 60)
         self.exist = False
         self.last_gif = str
+        self.client.loop_start()
         # The callback for when the client receives a CONNACK response from the server.
     def on_connect(self, client, userdata, flags, rc):
         print("Connected with result code "+str(rc))
@@ -34,16 +35,16 @@ class Scene():
         else:
             return None
     def start_loop(self):
-        self.client.loop_start()
-        if self.cap_usb.isOpened():
-            while self.message == "startsig":
-                success_usb, frame_usb = self.cap_usb.read()
-                image_lst.append(frame_usb)
-        if self.message == "stopsig" and len(image_lst) is not 0:
-            curr_time = datetime.now().strftime("%H%M%S")
-            imageio.mimsave(f'./video_{curr_time}.gif', image_lst, fps = 10)
-            self.last_gif = f"./video_{curr_time}.gif"
-            cv2.imwrite(f"./frame_{curr_time}.jpg", frame_usb)
-            image_lst = []
-            self.exist = True
+        while True:
+            if self.cap_usb.isOpened():
+                if self.message == "startsig":
+                    success_usb, frame_usb = self.cap_usb.read()
+                    image_lst.append(frame_usb)
+            if self.message == "stopsig" and len(image_lst) is not 0:
+                curr_time = datetime.now().strftime("%H%M%S")
+                imageio.mimsave(f'./video_{curr_time}.gif', image_lst, fps = 10)
+                self.last_gif = f"./video_{curr_time}.gif"
+                cv2.imwrite(f"./frame_{curr_time}.jpg", frame_usb)
+                image_lst = []
+                self.exist = True
 

@@ -243,7 +243,7 @@ class _Scene1State extends State<Scene1> {
                         children: [
                           Card(
                             child: Image.network(
-                              scene,
+                              'http://192.168.0.204:5000/scene',
                               width: 640,
                             ),
                           ),
@@ -253,20 +253,10 @@ class _Scene1State extends State<Scene1> {
                   )
                 : Card(
                     color: Colors.grey[400],
-                    child: ListTile(
-                      title: const Text(
+                    child: const ListTile(
+                      title: Text(
                         "아직 저장된 풍경이 없어요.",
                         textScaleFactor: 1.0,
-                      ),
-                      subtitle: Column(
-                        children: [
-                          Card(
-                            child: Image.network(
-                              'http://192.168.0.204:5000',
-                              width: 640,
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -277,8 +267,8 @@ class _Scene1State extends State<Scene1> {
             color: Colors.grey[400],
             child: const ListTile(
               title: Text(
-                "아직 저장된 풍경이 없어요.",
-                textScaleFactor: 1.5,
+                "아직 카메라가 연결되지 않았어요.",
+                textScaleFactor: 1.0,
               ),
             ),
           ),
@@ -312,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // Scene2(),
             // Scene3(),
             // Scene4(),
-            Image1(),
+            Scene1(),
             // Image2(),
           ],
         ),
