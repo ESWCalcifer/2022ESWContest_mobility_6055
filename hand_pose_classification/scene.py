@@ -1,32 +1,23 @@
 # -*- coding: utf-8 -*-
 from data_generate import num_hand
 # import hand_detection_module
-import cv2
+# import cv2
 from datetime import datetime
 import paho.mqtt.client as mqtt
 import imageio
+
 class Scene():
     client = mqtt.Client()
+    rc = 0
+
     def __init__(self):
         self.image_lst = []
-        self.cap_usb= cv2.VideoCapture(0)
+        # self.cap_usb= cv2.VideoCapture(0)
         self.message = str
-        self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
         self.exist = False
         self.last_gif = str
         # The callback for when the client receives a CONNACK response from the server.
-    def on_connect(self, client, userdata, flags, rc):
-        print("Connected with result code "+str(rc))
-        # Subscribing in on_connect() means that if we lose the connection and
-        # reconnect then subscriptions will be renewed.
-        self.client.subscribe("/home/pim/esw/test_mqtt/gesture")
 
-        # The callback for when a PUBLISH message is received from the server.
-    def start(self):        
-        self.client.connect("192.168.0.200",1883, 60)
-    def on_message(self, client, userdata, msg):
-        self.message = str(msg.payload.decode("utf-8"))
     def is_exist(self):
         return self.exist
     def get_last_gif(self):
@@ -48,4 +39,3 @@ class Scene():
                 self.image_lst = []
                 self.exist = True
 cscene = Scene()
-cscene.start()
