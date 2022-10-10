@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 detection = video_detection()
 detection.get_frame()
-con = sqlite3.connect("video_db", check_same_thread=False)
+con = sqlite3.connect("/home/pim/esw/imageserver/image2/example.db", check_same_thread=False)
 cur = con.cursor()
 
 def video_stream():
@@ -23,18 +23,27 @@ def video_stream():
 def video_feed():
     return Response(video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+# get first camera
+# @app.route("/home/pim/esw/imageserver/image2/example.db", methods = ['GET'])
 @app.route("/get_first_camera", methods = ['GET'])
 def get_first_camera():
     try:
         res = cur.execute("select detected from video where camera_id=0")
+        detected = res.fetchone()
+        print(detected[0])
         return dumps(res)
     except Exception as e:
         return dumps({'error' : str(e)})
 
+# get second camera
 @app.route("/get_second_camera", methods = ['GET'])
+# @app.route("/home/pim/esw/imageserver/image2/example.db", methods = ['GET'])
 def get_second_camera():
     try:
         res = cur.execute("select detected from video where camera_id=1")
+        detected = res.fetchone()
+        print(detected[0])
+        print(res)
         return dumps(res)
     except Exception as e:
         return dumps({'error' : str(e)})
