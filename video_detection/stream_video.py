@@ -27,16 +27,17 @@ def video_feed():
 def get_first_camera():
     try:
         res = cur.execute("select detected from video where camera_id=0")
-        return dumps(res)
+        string = res.fetchone()
+        return dumps({'detected' : string[0]})
     except Exception as e:
         return dumps({'error' : str(e)})
 
-@app.route("/get_second_camera", methods = ['GET'])
-def get_second_camera():
-    try:
-        res = cur.execute("select detected from video where camera_id=1")
-        return dumps(res)
-    except Exception as e:
-        return dumps({'error' : str(e)})
+# @app.route("/get_second_camera", methods = ['GET'])
+# def get_second_camera():
+#     try:
+#         res = cur.execute("select detected from video where camera_id=1")
+#         return dumps(res)
+#     except Exception as e:
+#         return dumps({'error' : str(e)})
 
 app.run(host='0.0.0.0', port='5000', debug=False)
