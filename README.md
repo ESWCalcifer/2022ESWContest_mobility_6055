@@ -27,12 +27,15 @@
 팀 소속: Kyunghee University
 
 -팀장: 강희진
+
 Email : gmldi118@khu.ac.kr
 
 -팀원 : 박수용
+
 Email : clapd10@naver.com
 
 -팀원 : 이다인
+
 Email : dyne_lee@khu.ac.kr
 
 <img src="https://user-images.githubusercontent.com/111634608/195121403-2a9700d1-1bf4-44be-b18d-aa2ede0f389e.png" width="400" height="200"/>
