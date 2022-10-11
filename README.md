@@ -1,4 +1,4 @@
-# 2022 ESWContest Team CALCIFER README.md
+# 2022 ESWContest Team 캘시퍼 README.md
 ## 작품 소개🚗
 개발 작품명 : 쓰담 SDAM (Solitary Driver Auxiliary Mode, 단독 운전자 보조 모드)
 
@@ -55,7 +55,8 @@ Email : clapd10@naver.com
 
 Email : dyne_lee@khu.ac.kr
 
-<img src="https://user-images.githubusercontent.com/111634608/195121403-2a9700d1-1bf4-44be-b18d-aa2ede0f389e.png" width="400" height="200"/>
+<img src="https://user-images.githubusercontent.com/111634608/195121403-2a9700d1-1bf4-44be-b18d-aa2ede0f389e.png" width="400" height="200"/> <img src="https://user-images.githubusercontent.com/111634608/195134008-89755413-e924-425d-a546-d0a2274d4b82.png" width="100" height="100"/>
+
 
 
 
