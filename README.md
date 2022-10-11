@@ -2,10 +2,20 @@
 ## 작품 소개🚗
 개발 작품명 : 쓰담 SDAM (Solitary Driver Auxiliary Mode, 단독 운전자 보조 모드)
 
+시연 링크
+- www.youtube.com/watch?v=SZ5Z8MOhNSs
+
 개발 작품설명(3줄 요약)
 - 좋은 풍경 모드: 주행 중 좋은 풍경 발견 시 제스처 인식 통한 녹화 및 사진 전송
 - 접근 방지 모드: 접근하는 생명체 인식 및 운전자에게 알림 전송
 - CO중독 방지 모드: 차박 시 일산화탄소 농도 감지 후 자동 환기 시스템
+
+
+<img src="https://user-images.githubusercontent.com/111634608/195131660-706a3df5-3849-4467-8574-c18018160a8f.png" width="500" height="300"/>
+<img src="(https://user-images.githubusercontent.com/111634608/195132247-3145155c-bb59-46d7-abda-311c103de4dd).png" width="200" height="350"/>
+<img src="https://user-images.githubusercontent.com/111634608/195132268-23a9d8d9-fc8c-4ba5-a8e2-27c90213ce1a.png" width="200" height="350"/>
+<img src="https://user-images.githubusercontent.com/111634608/195131878-954275de-566e-4278-9601-7c90d4c8eae8.png" width="200" height="350"/>
+
 
 개발 목표
 - 차량 내에서의 개인 맞춤 솔루션 제공을 통해 사용자가 특정 상황마다 자신에게 필요한 서비스를 선택적으로 사용할 수 있도록 하고자 한다. 
@@ -18,6 +28,16 @@
 - 꾸준히 증가하고 있는 1인 운전자와 차박 이용자를 주요 타겟으로 잡고, 그들이 겪을 수 있는 상황에서의 필요한 모드를 개발하고자 하였기에 홀로 있는 시간의 중요성이 대두되는 사회적 분위기에 따라 사용자의 요구를 충족할 수 있다. 
 - 최근 차박 중 일산화탄소 중독 사고 발생의 증가로, 이를 줄이는데 도움을 줄 수 있다. 
 
+### 구성도
+
+하드웨어
+
+<img src="https://user-images.githubusercontent.com/111634608/195128805-b6bffe2f-91dc-4a96-b63a-4457fe77e83f.png" width="500" height="300"/>
+
+소프트웨어
+
+
+<img src="https://user-images.githubusercontent.com/111634608/195129173-66dbfad5-94b9-4153-95e7-3b8efbe98e82.png" width="500" height="500"/>
 
 
 
@@ -39,3 +59,6 @@ Email : clapd10@naver.com
 Email : dyne_lee@khu.ac.kr
 
 <img src="https://user-images.githubusercontent.com/111634608/195121403-2a9700d1-1bf4-44be-b18d-aa2ede0f389e.png" width="400" height="200"/>
+
+
+
