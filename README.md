@@ -10,10 +10,7 @@
 - 접근 방지 모드: 접근하는 생명체 인식 및 운전자에게 알림 전송
 - CO중독 방지 모드: 차박 시 일산화탄소 농도 감지 후 자동 환기 시스템
 
-
-<img src="https://user-images.githubusercontent.com/111634608/195131660-706a3df5-3849-4467-8574-c18018160a8f.png" width="500" height="300"/>
-<img src="(https://user-images.githubusercontent.com/111634608/195132247-3145155c-bb59-46d7-abda-311c103de4dd).png" width="200" height="350"/>
-<img src="https://user-images.githubusercontent.com/111634608/195132268-23a9d8d9-fc8c-4ba5-a8e2-27c90213ce1a.png" width="200" height="350"/>
+<img src="https://user-images.githubusercontent.com/111634608/195131660-706a3df5-3849-4467-8574-c18018160a8f.png" width="500" height="300"/> <img src="https://user-images.githubusercontent.com/111634608/195132726-3b679b45-56bf-4493-a7d2-42a245469e11.jpg" width="300" height="300"/> <img src="https://user-images.githubusercontent.com/111634608/195132971-ecc34190-d8e0-4ce7-8dc3-30efe4e6a903.jpg" width="300" height="300"/>
 <img src="https://user-images.githubusercontent.com/111634608/195131878-954275de-566e-4278-9601-7c90d4c8eae8.png" width="200" height="350"/>
 
 
