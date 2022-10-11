@@ -26,16 +26,10 @@
 - 꾸준히 증가하고 있는 1인 운전자와 차박 이용자를 주요 타겟으로 잡고, 그들이 겪을 수 있는 상황에서의 필요한 모드를 개발하고자 하였기에 홀로 있는 시간의 중요성이 대두되는 사회적 분위기에 따라 사용자의 요구를 충족할 수 있다. 
 - 최근 차박 중 일산화탄소 중독 사고 발생의 증가로, 이를 줄이는데 도움을 줄 수 있다. 
 
-### 구성도
-
-하드웨어
-
-<img src="https://user-images.githubusercontent.com/111634608/195128805-b6bffe2f-91dc-4a96-b63a-4457fe77e83f.png" width="500" height="300"/>
-
-소프트웨어
+### 구성도(하드웨어, 소프트웨어)
 
 
-<img src="https://user-images.githubusercontent.com/111634608/195129173-66dbfad5-94b9-4153-95e7-3b8efbe98e82.png" width="500" height="500"/>
+<img src="https://user-images.githubusercontent.com/111634608/195128805-b6bffe2f-91dc-4a96-b63a-4457fe77e83f.png" width="500" height="300"/> <img src="https://user-images.githubusercontent.com/111634608/195129173-66dbfad5-94b9-4153-95e7-3b8efbe98e82.png" width="500" height="500"/>
 
 
 
